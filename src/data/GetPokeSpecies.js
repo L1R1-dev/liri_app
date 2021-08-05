@@ -16,9 +16,9 @@ import SearchBar from '../components/pokeApp/searchBar/SearchBar'
 
 
 export default function GetPokeSpecies() {
-    const [singleLoading, singleData, singleError] = useSingleFetch('https://pokeapi.co/api/v2/pokedex/2/')
+    const [singleLoading, singleData,] = useSingleFetch('https://pokeapi.co/api/v2/pokedex/2/')
     const [urls,setUrls] = useState([])
-    const [multiLoading, multiDatas, multiError] = useMultiFetch(urls)
+    const [multiLoading, multiDatas,] = useMultiFetch(urls)
 
     const [dataForSearching, setDataForSearching] = useState([])
     

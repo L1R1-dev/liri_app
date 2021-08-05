@@ -1,5 +1,5 @@
-import React, { useContext } from 'react'
-import { UpperState } from '../../../contextApi/GlobalState'
+import React from 'react'
+
 
 
 export default function Comparaison() {
@@ -10,14 +10,15 @@ export default function Comparaison() {
             <div className='attack' style={{border:'1px solid black'}}>
                 <div style={{display:'grid', width:'100px', height:'100px'}}>
                     {
-                        
+                        'card n°1 \n  val.comparaison[0]'
                     }
                 </div>
             </div>
-            <div className='defence' style={{border:'1px solid black'}}>
+            <div className='defense' style={{border:'1px solid black'}}>
                 <div style={{display:'grid', width:'100px', height:'100px'}}>
-                    {
-                        
+
+                    {                        
+                        'card n°1 \n  val.comparaison[1]'
                     }
                 </div>
             </div>

@@ -1,10 +1,10 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { UpperState } from '../../../contextApi/GlobalState'
 
 export default function PokeRow({data,counter}) {
     const val = useContext(UpperState)
     const [show, setShow] = useState(false)
-    const refData = useRef(data)
+
     
     useEffect(()=>{
         
@@ -13,19 +13,19 @@ export default function PokeRow({data,counter}) {
             if(val.comparaison[0] === null){
                 val.setComparaison(s=>({
                     ...s,
-                    0:refData.current
+                    0:data.id
                 }))  
 
             } else {
                 val.setComparaison(s=>({
                     ...s,
-                    1:refData.current
+                    1:data.id
                 }))
             }
 
         } else {
             for(const [key,value] of Object.entries(val.comparaison)){
-                if(value !== null && value.id === refData.current.id){
+                if(value !== null && value.id === data.id){
                     val.setComparaison(s=>({
                         ...s,
                         [`${key}`]:null
@@ -52,8 +52,8 @@ export default function PokeRow({data,counter}) {
     
     
     return (
-        <li id={refData.current.id} onClick={ handleClick } >
-            {refData.current.langName}: {JSON.stringify(show)}
+        <li id={data.id} onClick={ handleClick } >
+            {data.langName}: {JSON.stringify(show)}
         </li>
     )
 }

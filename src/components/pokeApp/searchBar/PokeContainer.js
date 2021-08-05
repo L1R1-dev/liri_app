@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useMemo, useRef, useState } from 'react'
+import React, { useContext } from 'react'
 import { UpperState } from '../../../contextApi/GlobalState';
 
 import PokeRow from './PokeRow'
@@ -16,22 +16,20 @@ export default function PokeContainer({filterText}) {
     //     }
 
     // })
-    console.log();
+
     for(const [key,value] of Object.entries(val.comparaison)){
         if(value !== null){
             counter++
 
         }
     }
-    useEffect(()=>{
-        val.pokemons.length!==0 &&  Array.from(val.pokemons).forEach( (d,i)=>{
-            if(d.langName.indexOf(filterText) !== -1){
-                container.push([<PokeRow key={d.langName} counter={counter} data={d}/>])
+    val.pokemons.length!==0 &&  Array.from(val.pokemons).forEach( (d,i)=>{
+        if(d.langName.indexOf(filterText) === -1){
+            return    
+        }
+        container.push(<PokeRow key={d.langName} counter={counter} data={d}/>)
+    })
 
-            }
-        })
-
-    },[filterText])
 
 
     return (
