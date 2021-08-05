@@ -5,7 +5,7 @@ import PokeRow from './PokeRow'
 
 export default function PokeContainer({filterText}) {
     const val = useContext(UpperState)
-    const [container,setContainer] = useState([])
+    const container = []
     let counter = 0
     
     // val.comparaison.forEach(p=>{
@@ -26,7 +26,7 @@ export default function PokeContainer({filterText}) {
     useEffect(()=>{
         val.pokemons.length!==0 &&  Array.from(val.pokemons).forEach( (d,i)=>{
             if(d.langName.indexOf(filterText) !== -1){
-                setContainer(s=>([...s,<PokeRow key={d.langName} counter={counter} data={d}/>,...s.slice(0,-1)]))
+                container.push([<PokeRow key={d.langName} counter={counter} data={d}/>,...s.slice(0,-1)])
 
             }
         })
