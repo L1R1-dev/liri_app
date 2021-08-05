@@ -1,10 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext } from 'react'
 import { UpperState } from '../../../contextApi/GlobalState'
-import Card from './Card'
+
 
 export default function Comparaison() {
-    const val = useContext(UpperState)
-    // const [comparaison,setComparaison] = useState([])
     
     
     return (

@@ -1,6 +1,5 @@
-import { render } from '@testing-library/react'
-import React, { createContext, useMemo, useState } from 'react'
-import GetPokeSpecies from '../data/GetPokeSpecies'
+import React, { createContext, useState } from 'react'
+
 
 export const UpperState = createContext()
 
