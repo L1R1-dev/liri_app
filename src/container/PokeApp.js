@@ -1,9 +1,9 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React from 'react'
 
 import GlobalState from '../contextApi/GlobalState'
 
 
-import SearchBar from '../components/pokeApp/searchBar/SearchBar'
+// import SearchBar from '../components/pokeApp/searchBar/SearchBar'
 import Comparaison from '../components/pokeApp/comparaison/Comparaison'
 import GetPokeSpecies from '../data/GetPokeSpecies'
 
