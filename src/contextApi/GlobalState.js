@@ -1,24 +1,33 @@
 import React, { createContext, useState } from 'react'
 
 
-export const UpperState = createContext()
+export const UpperPoke = createContext()
 
-const GlobalState = (props) =>{ 
+const GlobalState = ({children}) =>{ 
     const [pokemons,setPokemons] = useState([])
-    const [comparaison,setComparaison] = useState({0: null,1: null})
-    const val = {
+    const [styleCss,setStyleCss] = useState({
+        searchbarCss: {
+            w:null,
+            h:null
+        },
+        pokeContainerCss:{
+            h:null
+        }
+    })
+    const valPoke = {
         pokemons,
-        comparaison,
         setPokemons,
-        setComparaison
-
+        styleCss,
+        setStyleCss
     }
     
     return(
-        <UpperState.Provider value={val}>
-            {console.log('render')}
-            {props.children}
-        </UpperState.Provider>
+        <UpperPoke.Provider value={valPoke}>
+            {
+                // console.log(styleCss.searchbarCss, styleCss.pokeContainerCss)
+            }
+            {children}
+        </UpperPoke.Provider>
     )
 }
 

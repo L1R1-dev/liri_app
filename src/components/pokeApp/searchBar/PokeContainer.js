@@ -1,42 +1,44 @@
-import React, { useContext } from 'react'
-import { UpperState } from '../../../contextApi/GlobalState';
-
+import React, { useContext, useEffect, useState } from 'react'
+import { UpperPoke } from '../../../contextApi/GlobalState';
 import PokeRow from './PokeRow'
 
-export default function PokeContainer({filterText}) {
-    const val = useContext(UpperState)
-    const container = []
-    let counter = 0
-    
-    // val.comparaison.forEach(p=>{
-    //     for(const [key,value] of Object.entries(p)){
-    //         if(key === 'show' && value) {
-    //             counter ++
-    //         }
-    //     }
 
-    // })
+import '../../../css/pokeContainer.css'
 
-    for(const [key,value] of Object.entries(val.comparaison)){
-        if(value !== null){
-            counter++
 
-        }
+export default function PokeContainer({ filterText, onClosing }) {
+    const valPoke = useContext(UpperPoke)
+    const [listRows, setListRows] = useState([])
+    const limit = filterText.length >2
+    const style = {
+        display: !limit && 'none'
     }
-    val.pokemons.length!==0 &&  Array.from(val.pokemons).forEach( (d,i)=>{
-        if(d.langName.indexOf(filterText) === -1){
-            return    
-        }
-        container.push(<PokeRow key={d.langName} counter={counter} data={d}/>)
-    })
-
-
-
-    return (
-        <ul style={{listStyle:'none', overflowY:'scroll',maxWidth:'200px', maxHeight:'280px',border:'1px solid black'}}>
-            {
-                container
+               
+    useEffect(()=>{
+        valPoke.pokemons.length!==0 &&  Array.from(valPoke.pokemons).forEach( (c,i)=>{
+            if(c.langName.indexOf(filterText) === -1){
+                return
+            } else {
+                setListRows(s=>([
+                    ...s,
+                    <PokeRow key={c.langName} data={c}/>,
+                ]))
             }
-        </ul>
+        })
+        return ()=>{
+            setListRows([])
+        }
+    },[filterText, valPoke.pokemons])
+    
+    return (
+        <div id='border-pokeContainer' style={style}  >
+            <ul id='pokeContainer'className='' >
+                {
+                    !onClosing && limit && listRows
+                    // listRows
+                }
+            </ul>
+
+        </div>
     )
 }

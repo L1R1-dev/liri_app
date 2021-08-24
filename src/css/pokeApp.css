@@ -1,0 +1,9 @@
+.pokeApp button {
+    position: absolute;
+    margin-bottom: 0.01rem;
+    left: 60%;
+}
+
+#some-space{
+    height: 2rem;
+}

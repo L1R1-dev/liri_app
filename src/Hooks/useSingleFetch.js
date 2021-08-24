@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export default function useSingleFetch(url) {
-    const [error] = useState({
+    const [error,setError] = useState({
         error:[]
     })
     const [loading,setLoading] = useState(true)
@@ -20,6 +20,15 @@ export default function useSingleFetch(url) {
             }   
 
         })()
+        return () => {
+            setError({
+                error:[]
+            })
+            setData({
+                data:[]
+            })
+            setLoading(true)
+        }
     },[url])
     return [
         loading,

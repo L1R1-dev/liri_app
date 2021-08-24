@@ -1,0 +1,19 @@
+.damage{
+    display: flex;
+    justify-content: center;
+    box-shadow: inset 1px 1px 5px 0px rgb(232 225 225), inset -1px -1px 2px 0px #868282;
+    background: rgb(204, 198, 198);
+    border-radius: 0.1rem;
+    margin: 0 0.1em 0 0.1em;
+    
+}
+
+@media screen and (min-width: 321px) {
+    .damage{
+        display: flex;
+        justify-content: center;
+        border-radius: 0.1rem;
+        
+    }
+    
+}

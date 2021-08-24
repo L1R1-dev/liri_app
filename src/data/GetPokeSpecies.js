@@ -2,81 +2,67 @@ import React, { useContext, useEffect, useState } from 'react'
 
 import useSingleFetch from '../Hooks/useSingleFetch'
 import useMultiFetch from '../Hooks/useMultiFetch'
-
-
-import { UpperState } from '../contextApi/GlobalState'
-import SearchBar from '../components/pokeApp/searchBar/SearchBar'
-
-
-
-
-
-
-
-
+import { UpperPoke } from '../contextApi/GlobalState'
 
 export default function GetPokeSpecies() {
-    const [singleLoading, singleData,] = useSingleFetch('https://pokeapi.co/api/v2/pokedex/2/')
-    const [urls,setUrls] = useState([])
-    const [multiLoading, multiDatas,] = useMultiFetch(urls)
-
+    const [urlLoading, urlData,] = useSingleFetch('https://pokeapi.co/api/v2/pokedex/2/')
+    const [speciesUrl,setSpeciesUrl] = useState([])
+    const [, spceciesData,] = useMultiFetch(speciesUrl)
+    const valPoke = useContext(UpperPoke)
+    
     const [dataForSearching, setDataForSearching] = useState([])
     
-
-    const val = useContext(UpperState)
-    
-
     useEffect(()=>{
-        if(!singleLoading) {
-            singleData.pokemon_entries.forEach(p=>{
-                setUrls(s=>[
-                    ...s,
-                    p.pokemon_species.url
-                ])
-            })
+        !urlLoading && urlData.pokemon_entries.forEach(p=>{
+            setSpeciesUrl(s=>[
+                ...s,
+                p.pokemon_species.url
+            ])
+        })
+        return () =>{
+            setSpeciesUrl([])
         }
-    },[singleLoading])
+    },[urlData.pokemon_entries, urlLoading])
 
     useEffect(()=>{
-        if(!multiLoading && multiDatas.length !== 0) {
-            multiDatas.forEach(element=>{
-                let items ={
-                    id: element.id,
-                    is_baby: element.is_baby ? 'baby':'',
-                    is_legendary: element.is_legendary? 'legendary':'',
-                    is_mythical: element.is_mythical? 'mythical':'',
-                    show: false
+        spceciesData.forEach(s=>{
+            let items ={
+                id: s.id,
+                is_baby: s.is_baby ? true : false,
+                is_legendary: s.is_legendary? true : false,
+                is_mythical: s.is_mythical? true : false,
+            }
+            s.names.forEach( n => {
+                if(n.language.name === 'fr') {
+                    items.langName = n.name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()                                
                 }
-                element.names.forEach( n => {
-                    if(n.language.name === 'fr') {
-                        items.langName = n.name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()                                
-                    }
-                })
-                element.varieties.forEach( v=> {
-                    if(v.is_default){
-                        items.pokemon = v.pokemon.url
-                    }
-                })
-                setDataForSearching(s=>([
-                    ...s,
-                    items
-                ]))
             })
-        }
-    },[multiDatas])
+            s.varieties.forEach( v=> {
+                if(v.is_default){
+                    items.pokemon = v.pokemon.url
+                }
+            })
+            setDataForSearching(s=>([
+                ...s,
+                items
+            ]))
+            return ()=>{
+                setDataForSearching([])
+            }
+        })
+    },[spceciesData])
 
     useEffect(()=>{
-        
-        !multiLoading && val.setPokemons(dataForSearching)
-
-    },[dataForSearching, multiLoading])
+        valPoke.setPokemons(dataForSearching)
+        return ()=>{
+            valPoke.setPokemons([])
+        }
+    },[dataForSearching, valPoke])
     
-
+    // dataForSearching.length !== 0 && console.log(dataForSearching);
     return (
         <React.Fragment>
-            {
-                !multiLoading && multiDatas.length !== 0 && <SearchBar />
-            }
+            
         </React.Fragment>
     ) 
 

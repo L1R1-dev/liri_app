@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export default function useMultiFetch(urls) {
-    const [multiError] = useState({
+    const [multiError,setMultiError] = useState({
         error:[]
     })
     const [multiDatas,setMultiDatas] = useState({
@@ -22,6 +22,15 @@ export default function useMultiFetch(urls) {
 
                 setMultiLoading(false)
         })()
+        return () => {
+            setMultiError({
+                error:[]
+            })
+            setMultiDatas({
+                data:[]
+            })
+            setMultiLoading(true)
+        }
     },[urls])
     
     

@@ -1,0 +1,12 @@
+#pokeContainer{
+    position: relative;
+    list-style: none;
+    width: 86%;    
+    overflow: scroll;
+    background: inherit;
+    z-index: 4;
+    
+}
+#pokeContainer::-webkit-scrollbar{
+    display: none;
+}

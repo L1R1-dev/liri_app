@@ -1,59 +1,44 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { UpperState } from '../../../contextApi/GlobalState'
+import React, { useContext } from 'react'
+import '../../../css/pokeRow.css'
+import { UpperComparaison } from '../../../contextApi/GlobalStateComparaison'
 
-export default function PokeRow({data,counter}) {
-    const val = useContext(UpperState)
-    const [show, setShow] = useState(false)
+export default function PokeRow({data}) {
+    const valComp = useContext(UpperComparaison)
+    const stateOfValComp = valComp.state
+
+    const elem1 = stateOfValComp[0]
+    const elem2 = stateOfValComp[1]    
+
+    const fullState = elem1 !== null && elem2 !==  null
+    // const elemInState = ( elem1 empty or id of elem1 != id of this Row ) and ( elem2 empty and id of elem2 != id of this Row )
+    const elemNotInState = ( elem1 === null || (elem1.id !== data.id) ) && ( elem2 === null || (elem2.id !== data.id) ) 
+    
+    const show = elemNotInState ? false : true 
 
     
-    useEffect(()=>{
-        
 
-        if(show){
-            if(val.comparaison[0] === null){
-                val.setComparaison(s=>({
-                    ...s,
-                    0:data.id
-                }))  
+    function handleClick(e){
+        e.stopPropagation()
+        if( elemNotInState  ) {
+            if( !fullState ) {
+                valComp.dispatch({ type: 'ADD', payload: data })
 
-            } else {
-                val.setComparaison(s=>({
-                    ...s,
-                    1:data.id
-                }))
+            }else {
+                console.log('toMuch');
             }
-
         } else {
-            for(const [key,value] of Object.entries(val.comparaison)){
-                if(value !== null && value.id === data.id){
-                    val.setComparaison(s=>({
-                        ...s,
-                        [`${key}`]:null
-                    }))
-                    
+            for(const [key,value] of Object.entries(stateOfValComp)){
+                if(value !== null && data.id === value.id){
+                    valComp.dispatch({ type: 'DELETE', payload: Number(key) })
                 }
-                
             }
         }
-    },[show])
-    
-
-    
-    function handleClick(e){
-        const targetId = e.target.id
-        setShow(!show)
-        
-        if(counter>= 2 && !show){
-            console.log('2 composant max');
-            return 
-        }  
     }
-    
-    
-    
+     
     return (
-        <li id={data.id} onClick={ handleClick } >
-            {data.langName}: {JSON.stringify(show)}
+        <li id={data.id} className='pokeItem' onClick={ handleClick } >
+            {data.langName}: 
+            {JSON.stringify(show)}
         </li>
     )
 }

@@ -1,0 +1,19 @@
+.aboutDamages{
+    display: grid;
+}
+.aboutDamages span {
+    padding-left: 0.9em;
+    padding-bottom: 0.2em;
+}
+.damageRows{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 0.1rem ;
+}
+
+@media screen and (min-width: 768px) {
+    .damageRows{
+        gap: 0.3rem ;
+    }
+    
+}
