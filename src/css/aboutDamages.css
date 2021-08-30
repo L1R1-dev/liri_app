@@ -9,8 +9,8 @@
     grid-template-columns: 1fr 3fr;
     margin-bottom: 0.5em;
     grid-template-areas: 
-        '. title'
-        'dmg .'
+        'title title'
+        '. dmg'
         ;
 }
 /* .aboutDamages span {
