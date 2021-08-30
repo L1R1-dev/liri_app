@@ -4,21 +4,17 @@ import AboutDamages from './damage_relation/AboutDamages'
 import '../../css/type.css'
 
 
-export default function Type({ url, position }) {
-    const [loading,data,] = useSingleFetch(url)
+export default function Type({ url, position, toShow }) {
     const [keys,setKeys] = useState([])
     let name = ''
-    !loading && data.names.map(d=>{
-       
-        if(d.language.name === 'fr'){
-            return name = d.name
-        }
-        return  ''
-    });
-
+    
     useEffect(()=>{
-        if(!loading) {
-            for(const key of Object.keys(data.damage_relations)){
+        // name !== undefined && name !== '' && console.log(name);
+        
+    },[name])
+    useEffect(()=>{
+        if(url !== undefined && url !== null ){
+            for(const key of Object.keys(url)){
                 const atk = key.endsWith('to') && position === 'attack'
                 const def = key.endsWith('from') && position === 'defense'
                 if(atk){
@@ -26,7 +22,6 @@ export default function Type({ url, position }) {
                         ...s,
                         key
                     ]))
-
                 }
                 if(def){
                     setKeys(s=>([
@@ -39,30 +34,31 @@ export default function Type({ url, position }) {
         return ()=>{
             setKeys([])
         }
-    },[data.damage_relations, loading, position])
+    },[position, url])
+    
+    // useEffect(()=>{
+    //     const element = document.getElementById('typeContainer').children
+    //     if( toShow === Number(element[toShow].id)){
+    //         element[toShow].classList.add('selected')
+    //     }
+       
+    // },[])
 
     
-
     
     // !loading && console.log(state);
     return (
-
             <div id={name} className='typeOfPokemon' >
-                <span>{name}</span>
-                <div className='type'>
+                <div className='typeLoop'>
                     {
                         keys.map(k=>{
-                            // console.log(data.damage_relations[k].length);
-                            if(data.damage_relations[k].length === 0){
+                            if(url[k].length === 0){
                                 return ''
                             }
-                            return <AboutDamages key={k} name={k} data={data.damage_relations[k]} />
+                            return <AboutDamages key={k} name={k} data={url[k]} />
                         })
                     }
                 </div>
             </div>
-
-
-
     )
 }

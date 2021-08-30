@@ -2,7 +2,8 @@
     display: grid;
     left: 6%;
     position: absolute;
-    justify-content: center;        
+    justify-content: center;    
+    z-index: 8;    
 }
 #searchbar-container{
     position: relative;

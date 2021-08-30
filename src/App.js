@@ -24,7 +24,6 @@ function App() {
     <div className="App" onClick={handleClick}>
       <PokeApp onClosing={closePokeContainer} />
 
-      
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import useSingleFetch from '../../../Hooks/useSingleFetch'
 import '../../../css/aboutDamagesRows.css'
 
@@ -12,6 +12,9 @@ export default function AboutDamagesRows({url}) {
         }
         return ''
     })
+
+    
+
     return (
         <li className='damage'>
             {

@@ -7,9 +7,9 @@ import { UpperPoke } from '../contextApi/GlobalState'
 export default function GetPokeSpecies() {
     const [urlLoading, urlData,] = useSingleFetch('https://pokeapi.co/api/v2/pokedex/2/')
     const [speciesUrl,setSpeciesUrl] = useState([])
-    const [, spceciesData,] = useMultiFetch(speciesUrl)
+    const [loading, speciesData,] = useMultiFetch(speciesUrl)
     const valPoke = useContext(UpperPoke)
-    
+    const [pokemonDetail, setPokemonDetail] = useState()
     const [dataForSearching, setDataForSearching] = useState([])
     
     useEffect(()=>{
@@ -23,9 +23,10 @@ export default function GetPokeSpecies() {
             setSpeciesUrl([])
         }
     },[urlData.pokemon_entries, urlLoading])
-
+    // !loading && console.log(speciesData)
     useEffect(()=>{
-        spceciesData.forEach(s=>{
+        
+        (!loading && speciesData !== undefined) && speciesData.forEach(s=>{
             let items ={
                 id: s.id,
                 is_baby: s.is_baby ? true : false,
@@ -50,7 +51,7 @@ export default function GetPokeSpecies() {
                 setDataForSearching([])
             }
         })
-    },[spceciesData])
+    },[loading, speciesData])
 
     useEffect(()=>{
         valPoke.setPokemons(dataForSearching)
@@ -58,6 +59,7 @@ export default function GetPokeSpecies() {
             valPoke.setPokemons([])
         }
     },[dataForSearching, valPoke])
+    
     
     // dataForSearching.length !== 0 && console.log(dataForSearching);
     return (

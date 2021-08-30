@@ -24,28 +24,83 @@ span.position {
     margin-right: 0.2em;
     grid-area: position;
 }
+#typeNameContainer{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    margin: 2em 0em 1em 0em;
+}
+
+span.typeName.selected{
+    border-bottom: 1px solid black;
+}
+/* #typeContainer > span:nth-child(0){
+    grid-area: typeName1;
+}
+#typeContainer > span:nth-child(1){
+    grid-area: typeName2;
+}
+.typeLoop{
+    grid-area: type;
+} */
 .cardContainer{
     display: grid;
+    position: relative;
     margin-top: 3rem;
+    height: 31rem;
     grid-template-columns: 1fr ;
     grid-template-rows: 1fr 3fr;
     border: 0.4rem solid rgb(228, 206, 10);
     border-radius: 0.5rem;
+    background: white;
+    overflow: hidden;
+
 }
 .cardContainer.one{
     position: fixed;
-    height: 17rem;
 }
-.cardContainer.two{
-    height: 31rem;
-}
+
 .card{
     display: grid;
-    padding: 0.2em;    
+    padding: 0.2em;
+    max-height: 100%;
+    background: rgba(255, 255, 255, 0);    
+    z-index: 3;
 }
-.cardContainer.normal{
-    background: #b6b6b6;
+
+.background{
+    position: absolute;
+    width: 75em;
+    height: 41em;
+    left: -28.5em;
+    border: none;
+    opacity: 30%;
+    z-index: 0;
+    
 }
+.fire .background {
+    width: 88em ;
+    left:0em;
+    
+}
+.grass .background {
+    
+    width: 88em;
+    height: 41em;
+    left: -53em;
+}
+.water .background {
+    
+    width: 100em;
+    height: 41em;
+    left: -80em;
+}
+.ice .background {
+    
+    width: 75em;
+    height: 41em;
+    left: -19em;
+}
+
 .cardContainer.mythical{
     background: #c5b8da;
 }
@@ -71,6 +126,7 @@ div.header{
     justify-content: center;
     border-radius: 0.1rem;
 }
+
 
 
 @media screen and (min-width: 375px ) {
@@ -100,12 +156,7 @@ div.header{
         padding: 0.6em;
         
     }
-    .cardContainer.one{
-        height: 25rem;
-    }
-    .cardContainer.two{
-        height: 36rem;
-    }
+    
 }
 @media screen and (min-width: 1024px ) {
     span.icon {

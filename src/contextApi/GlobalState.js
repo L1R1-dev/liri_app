@@ -26,6 +26,7 @@ const GlobalState = ({children}) =>{
             {
                 // console.log(styleCss.searchbarCss, styleCss.pokeContainerCss)
             }
+            
             {children}
         </UpperPoke.Provider>
     )

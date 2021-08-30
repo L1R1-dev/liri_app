@@ -8,8 +8,9 @@ export default function useSingleFetch(url) {
     const [data,setData] = useState({
         data:[]
     })
+
     useEffect(()=>{
-        (async function(){
+        url !== null ? (async function(){
             const response = await fetch(url)
             const responseData = await response.json()
             if(response.ok){
@@ -18,8 +19,11 @@ export default function useSingleFetch(url) {
                 })
                 setLoading(false)
             }   
-
-        })()
+            
+        })() : (
+            setLoading(true)
+            
+        )
         return () => {
             setError({
                 error:[]
@@ -30,9 +34,15 @@ export default function useSingleFetch(url) {
             setLoading(true)
         }
     },[url])
-    return [
-        loading,
-        data.data,
-        error.error,
-    ]
+
+    if(url !== null){
+        
+        return [
+            loading,
+            data.data,
+            error.error,
+        ]
+    } else {
+        return 
+    }
 }

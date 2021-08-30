@@ -10,6 +10,7 @@ export default function AboutDamages({name,data}) {
     const rows = data.map(d=>{
         return <AboutDamagesRows key={d.name} url={d.url} />
     })
+    
     return (
             <div className='aboutDamages'>
                 <span>
