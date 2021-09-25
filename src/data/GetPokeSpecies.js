@@ -5,13 +5,17 @@ import useMultiFetch from '../Hooks/useMultiFetch'
 import { UpperPoke } from '../contextApi/GlobalState'
 
 export default function GetPokeSpecies() {
+    // 1.URLS
     const [urlLoading, urlData,] = useSingleFetch('https://pokeapi.co/api/v2/pokedex/2/')
     const [speciesUrl,setSpeciesUrl] = useState([])
+
+    // 2.DATA
     const [loading, speciesData,] = useMultiFetch(speciesUrl)
+       
+    // 3.CONTEXT
     const valPoke = useContext(UpperPoke)
-    const [pokemonDetail, setPokemonDetail] = useState()
-    const [dataForSearching, setDataForSearching] = useState([])
     
+    // 2-
     useEffect(()=>{
         !urlLoading && urlData.pokemon_entries.forEach(p=>{
             setSpeciesUrl(s=>[
@@ -23,11 +27,11 @@ export default function GetPokeSpecies() {
             setSpeciesUrl([])
         }
     },[urlData.pokemon_entries, urlLoading])
-    // !loading && console.log(speciesData)
+
+    //from speciesUrls make an initial object (items) => (dataForSearging)
     useEffect(()=>{
-        
-        (!loading && speciesData !== undefined) && speciesData.forEach(s=>{
-            let items ={
+        (!loading && speciesData !== undefined) && speciesData.forEach( s => {
+            let item = {
                 id: s.id,
                 is_baby: s.is_baby ? true : false,
                 is_legendary: s.is_legendary? true : false,
@@ -35,31 +39,28 @@ export default function GetPokeSpecies() {
             }
             s.names.forEach( n => {
                 if(n.language.name === 'fr') {
-                    items.langName = n.name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()                                
+                    item.langName = n.name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()                                
                 }
             })
-            s.varieties.forEach( v=> {
+            s.varieties.forEach( v => {
                 if(v.is_default){
-                    items.pokemon = v.pokemon.url
+                    item.pokemon = v.pokemon.url
                 }
             })
-            setDataForSearching(s=>([
-                ...s,
-                items
-            ]))
+            valPoke.setPokemons( s => ({
+                items:[ 
+                    ...s.items,
+                    item
+                ]
+            }))
             return ()=>{
-                setDataForSearching([])
+                valPoke.setPokemons({
+                    items:[]
+                })
             }
         })
     },[loading, speciesData])
 
-    useEffect(()=>{
-        valPoke.setPokemons(dataForSearching)
-        return ()=>{
-            valPoke.setPokemons([])
-        }
-    },[dataForSearching, valPoke])
-    
     
     // dataForSearching.length !== 0 && console.log(dataForSearching);
     return (
@@ -67,7 +68,24 @@ export default function GetPokeSpecies() {
             
         </React.Fragment>
     ) 
-
-
+    
     
 }
+
+// OLD CODE
+
+//set dataForSearching to valPoke (globalState) 
+// useEffect(()=>{
+//     valPoke.setPokemons(dataForSearching)
+//     return ()=>{
+//         valPoke.setPokemons([])
+//     }
+// },[dataForSearching, valPoke])
+ // setDataForSearching( s => ([
+
+ //     ...s,
+//     items
+// ]))
+// return ()=>{
+//     setDataForSearching([])
+// }

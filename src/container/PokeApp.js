@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import GlobalState from '../contextApi/GlobalState'
 import GlobalStateComparaison from '../contextApi/GlobalStateComparaison'
 import GetPokeSpecies from '../data/GetPokeSpecies'

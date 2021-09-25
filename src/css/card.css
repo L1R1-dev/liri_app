@@ -94,12 +94,12 @@ span.typeName.selected{
     height: 41em;
     left: -80em;
 }
-.ice .background {
-    
+/* .ice .background {
+
     width: 75em;
-    height: 41em;
-    left: -19em;
-}
+    height: 800px;
+    left: -28em;
+} */
 
 .cardContainer.mythical{
     background: #c5b8da;

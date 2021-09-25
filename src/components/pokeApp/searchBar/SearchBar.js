@@ -15,29 +15,24 @@ export default function SearchBar({ filterText, onFilterTextChange, onClosing })
         border:( onClosing || !limit) && 'none',
     }
 
-    
-    
-
     return (
-            <div id='searchbar'>
-                <div id='searchbar-container' >
-                    <div id='input'>
-                        <input
-                            name=""
-                            type="text"
-                            id="searchinput"
-                            value={filterText}
-                            placeholder='Pokemons...'
-                            autoComplete='off'
-                            onChange={ handleOnChange } />
-                    </div>
-                    <div className='separator' style={style}></div>
-                    {
-                        filterText !== undefined && <PokeContainer filterText={filterText} onClosing={onClosing} limit={limit}  />
-                    }
+        <div id='searchbar'>
+            <div id='searchbar-container' >
+                <div id='input'>
+                    <input
+                        name=""
+                        type="text"
+                        id="searchinput"
+                        value={filterText}
+                        placeholder='Pokemons...'
+                        autoComplete='off'
+                        onChange={ handleOnChange } />
                 </div>
+                <div className='separator' style={style}></div>
+                {
+                    filterText !== undefined && <PokeContainer filterText={filterText} onClosing={onClosing} limit={limit}  />
+                }
             </div>
-
-            
+        </div>
     )
 }

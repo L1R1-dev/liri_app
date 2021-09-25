@@ -1,48 +1,30 @@
 import { useEffect, useState } from 'react'
 
 export default function useSingleFetch(url) {
-    const [error,setError] = useState({
-        error:[]
+    const [state,setState] = useState({
+        data:[],
+        loading: true,
+        error:[],
     })
-    const [loading,setLoading] = useState(true)
-    const [data,setData] = useState({
-        data:[]
-    })
-
     useEffect(()=>{
-        url !== null ? (async function(){
+        (async function(){
             const response = await fetch(url)
             const responseData = await response.json()
             if(response.ok){
-                setData({
+                setState(s=>({
+                    ...s,
+                    loading:false,
                     data: responseData
-                })
-                setLoading(false)
+                }))
             }   
             
-        })() : (
-            setLoading(true)
-            
-        )
-        return () => {
-            setError({
-                error:[]
-            })
-            setData({
-                data:[]
-            })
-            setLoading(true)
-        }
+        })() 
     },[url])
-
-    if(url !== null){
-        
-        return [
-            loading,
-            data.data,
-            error.error,
-        ]
-    } else {
-        return 
-    }
+    
+    return [
+        state.loading,
+        state.data,
+        state.error,
+    ]
+     
 }

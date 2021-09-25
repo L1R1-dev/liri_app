@@ -2,9 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { UpperPoke } from '../../../contextApi/GlobalState';
 import PokeRow from './PokeRow'
 
-
 import '../../../css/pokeContainer.css'
-
 
 export default function PokeContainer({ filterText, onClosing }) {
     const valPoke = useContext(UpperPoke)
@@ -14,8 +12,8 @@ export default function PokeContainer({ filterText, onClosing }) {
         display: !limit && 'none'
     }
                
-    useEffect(()=>{
-        valPoke.pokemons.length!==0 &&  Array.from(valPoke.pokemons).forEach( (c,i)=>{
+    useEffect( () => {
+        valPoke.pokemons.items.length!==0 &&  Array.from(valPoke.pokemons.items).forEach( (c,i)=>{
             if(c.langName.indexOf(filterText) === -1){
                 return
             } else {
@@ -28,7 +26,7 @@ export default function PokeContainer({ filterText, onClosing }) {
         return ()=>{
             setListRows([])
         }
-    },[filterText, valPoke.pokemons])
+    },[filterText, valPoke.pokemons.items])
     
     return (
         <div id='border-pokeContainer' style={style}  >
@@ -38,7 +36,6 @@ export default function PokeContainer({ filterText, onClosing }) {
                     // listRows
                 }
             </ul>
-
         </div>
     )
 }

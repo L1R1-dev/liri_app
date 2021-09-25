@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from 'react'
 import { UpperComparaison } from '../../../contextApi/GlobalStateComparaison'
 import '../../../css/comparaison.css'
 import useMultiFetch from '../../../Hooks/useMultiFetch'
-import useSingleFetch from '../../../Hooks/useSingleFetch'
 import Card from './Card'
 
 export default function Comparaison({ toggle, setToggle }) {
@@ -33,6 +32,7 @@ export default function Comparaison({ toggle, setToggle }) {
         dataDetail:[]
     })
     const [ loading, data, ] = useMultiFetch( state.dataDetail.length !== 0 && state.dataDetail )
+    
     // const type = !loading && data.map( d =>{
     //     return d.types
     // })

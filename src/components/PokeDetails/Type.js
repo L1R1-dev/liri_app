@@ -36,17 +36,6 @@ export default function Type({ url, position, toShow }) {
         }
     },[position, url])
     
-    // useEffect(()=>{
-    //     const element = document.getElementById('typeContainer').children
-    //     if( toShow === Number(element[toShow].id)){
-    //         element[toShow].classList.add('selected')
-    //     }
-       
-    // },[])
-
-    
-    
-    // !loading && console.log(state);
     return (
             <div id={name} className='typeOfPokemon' >
                 <div className='typeLoop'>
@@ -62,3 +51,15 @@ export default function Type({ url, position, toShow }) {
             </div>
     )
 }
+
+ // useEffect(()=>{
+    //     const element = document.getElementById('typeContainer').children
+    //     if( toShow === Number(element[toShow].id)){
+    //         element[toShow].classList.add('selected')
+    //     }
+       
+    // },[])
+
+    
+    
+    // !loading && console.log(state);

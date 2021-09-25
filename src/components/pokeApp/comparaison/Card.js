@@ -1,13 +1,14 @@
-import React, { useContext, useEffect, useLayoutEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { UpperComparaison } from '../../../contextApi/GlobalStateComparaison'
 import useSingleFetch from '../../../Hooks/useSingleFetch'
+import useMultiFetch from '../../../Hooks/useMultiFetch'
 import Type from '../../PokeDetails/Type'
 import '../../../css/card.css'
 import '../../../css/card.css'
 
-import useMultiFetch from '../../../Hooks/useMultiFetch'
 
-import multi1 from '../../../picture/images1.jpeg'
+import Image1Svg from '../../../picture/Image1Svg'
+// import test from '../../../picture/test.svg'
 import multi2 from '../../../picture/images2.jpeg'
 import bug from '../../../picture/bug.jpeg'
 import dark from '../../../picture/dark.jpeg'
@@ -25,33 +26,30 @@ export default function Card({ dataCard, dataNext, position }) {
     // VARIABLE ABOUT DATA
     const [loading,data,] = useSingleFetch(dataCard.pokemon) 
     // const [ multiLoading, multiData, ] = useMultiFetch(data.type)
-
     const [state,setState] = useState({
         dataDetail:[]
     })
     const [loading2, data2,] = useMultiFetch(state.dataDetail)
     // !loading2 && console.log(data2);
+    
     // VARIABLE ABOUT TYPE OF THIS CARD
     const [types,setTypes] = useState([])
     
-    
-   
     // VARIABLE ABOUT STATE OF COMPARAISON
     const valComp = useContext(UpperComparaison)
-    const stateOfValComp = valComp.state
-
-    
+    const stateOfValComp = valComp.state    
     const [toShow, setToShow] = useState(0) 
+    
     // VARIABLE ABOUT CLASS OF THIS CARD
     const isBaby = dataCard['is_baby'] && 'baby'
     const isLegendary = dataCard['is_legendary'] && 'legendary'
     const isMythical = dataCard['is_mythical'] && 'mythical'
     const isNormal = !isBaby && !isLegendary && !isMythical && 'normal'
     const firstType = !loading && data.types[0].type.name
-
+    
     // VARIABLE TO KNOW HOW MUCH TYPE IN CARD
     const typeLength = !loading && data.types.length
-
+    console.log( (data && data.length !== 0) && data )
     const typeName = !loading2 && data2.map((d,i)=>{
         return d.names.map(n=>{
             if(n.language.name==='fr'){
@@ -65,20 +63,6 @@ export default function Card({ dataCard, dataNext, position }) {
             return e !== null
         })
     })
-    
-    
-    // ABOUT CROSS click
-    function handleClickX(e){
-        for(const [key,value] of Object.entries(stateOfValComp)){
-            if(value !== null && dataCard.id === value.id){
-                valComp.dispatch({ type: 'DELETE', payload: Number(key) })
-            }
-        }
-    }
-    function handleclickType(e){
-        console.log(e.target)
-        setToShow(Number(e.target.id))
-    }
     
     useEffect(()=>{
         dataNext !== undefined && dataNext.types.forEach(t=>{
@@ -112,10 +96,22 @@ export default function Card({ dataCard, dataNext, position }) {
             setTypes([])
         }
     },[data2, position, toShow])
-    
+
+    // ABOUT CROSS click
+    function handleClickX(e){
+        for(const [key,value] of Object.entries(stateOfValComp)){
+            if(value !== null && dataCard.id === value.id){
+                valComp.dispatch({ type: 'DELETE', payload: Number(key) })
+            }
+        }
+    }
+    function handleclickType(e){
+        setToShow(Number(e.target.id))
+    }
     const background = (type) =>{
         if(type === 'ice'){
-            return <img  className='background' src={multi1} alt=""  />
+            // return <img  className='background' src={test} alt=""  />
+            return <Image1Svg  />
         }
         if(type === 'fire' || type === 'grass' || type === 'water') {
             return <img  className='background' src={multi2} alt=""  />
