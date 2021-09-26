@@ -1,5 +1,4 @@
 import React, { createContext, useMemo, useReducer } from 'react'
-import useMultiFetch from '../Hooks/useMultiFetch'
 
 export const UpperComparaison = createContext()
 
@@ -36,10 +35,8 @@ function reducer(state,action){
     }
 }
 
-const GlobalStateComparaison = ({children}) => {
+const GlobalStateComparaison = ({ children }) => {
     const [state,dispatch] = useReducer(reducer,init)
-    
-    
     const valComp = useMemo(()=>{
         return {
             state,
@@ -49,9 +46,11 @@ const GlobalStateComparaison = ({children}) => {
     
     return (
         <UpperComparaison.Provider value={valComp}>
-            {/* {
-                JSON.stringify(state[0].pokemon)
-            }    */}
+            {/* 
+                {
+                    JSON.stringify(state[0].pokemon)
+                }
+            */}
 
             {
                 children

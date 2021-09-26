@@ -5,7 +5,7 @@ import PokeRow from './PokeRow'
 import '../../../css/pokeContainer.css'
 
 export default function PokeContainer({ filterText, onClosing }) {
-    const valPoke = useContext(UpperPoke)
+    const dataPoke = useContext(UpperPoke)
     const [listRows, setListRows] = useState([])
     const limit = filterText.length >2
     const style = {
@@ -13,7 +13,7 @@ export default function PokeContainer({ filterText, onClosing }) {
     }
                
     useEffect( () => {
-        valPoke.pokemons.items.length!==0 &&  Array.from(valPoke.pokemons.items).forEach( (c,i)=>{
+        dataPoke.data.length!==0 &&  Array.from(dataPoke.data).forEach( (c,i)=>{
             if(c.langName.indexOf(filterText) === -1){
                 return
             } else {
@@ -26,7 +26,7 @@ export default function PokeContainer({ filterText, onClosing }) {
         return ()=>{
             setListRows([])
         }
-    },[filterText, valPoke.pokemons.items])
+    },[filterText, dataPoke])
     
     return (
         <div id='border-pokeContainer' style={style}  >

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import useSingleFetch from '../../Hooks/useSingleFetch'
 import AboutDamages from './damage_relation/AboutDamages'
 import '../../css/type.css'
 

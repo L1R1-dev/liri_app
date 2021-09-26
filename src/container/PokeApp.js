@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import GlobalState from '../contextApi/GlobalState'
 import GlobalStateComparaison from '../contextApi/GlobalStateComparaison'
-import GetPokeSpecies from '../data/GetPokeSpecies'
+// import GetPokeSpecies from '../data/GetPokeSpecies'
 import SearchBar from '../components/pokeApp/searchBar/SearchBar'
 import Comparaison from '../components/pokeApp/comparaison/Comparaison'
 import '../css/pokeApp.css'
@@ -18,8 +18,7 @@ export default function PokeApp({onClosing}) {
             </div>
             <GlobalState> 
                 {/* State Of Loaded Pokemons */}
-                <GetPokeSpecies />
-                    {/* The Previous Component Set The Data */}
+                
                 <GlobalStateComparaison>
                     {/* State Of Pokemons To Compare */}
                     <SearchBar 

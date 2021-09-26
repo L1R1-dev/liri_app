@@ -31,7 +31,7 @@ export default function Comparaison({ toggle, setToggle }) {
     const [state,setState] = useState({
         dataDetail:[]
     })
-    const [ loading, data, ] = useMultiFetch( state.dataDetail.length !== 0 && state.dataDetail )
+    const [ , data, ] = useMultiFetch( state.dataDetail.length !== 0 && state.dataDetail )
     
     // const type = !loading && data.map( d =>{
     //     return d.types
@@ -49,7 +49,7 @@ export default function Comparaison({ toggle, setToggle }) {
     useEffect(()=>{
         setToggle(true)
     },[emptyState, setToggle])
-    
+
     return (
         <div className='comparaison' >
                 <div className='left-side' >

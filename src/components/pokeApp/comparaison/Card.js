@@ -4,7 +4,7 @@ import useSingleFetch from '../../../Hooks/useSingleFetch'
 import useMultiFetch from '../../../Hooks/useMultiFetch'
 import Type from '../../PokeDetails/Type'
 import '../../../css/card.css'
-import '../../../css/card.css'
+
 
 
 import Image1Svg from '../../../picture/Image1Svg'
@@ -49,7 +49,7 @@ export default function Card({ dataCard, dataNext, position }) {
     
     // VARIABLE TO KNOW HOW MUCH TYPE IN CARD
     const typeLength = !loading && data.types.length
-    console.log( (data && data.length !== 0) && data )
+    
     const typeName = !loading2 && data2.map((d,i)=>{
         return d.names.map(n=>{
             if(n.language.name==='fr'){
