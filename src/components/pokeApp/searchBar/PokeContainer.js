@@ -13,7 +13,7 @@ export default function PokeContainer({ filterText, onClosing }) {
     }
                
     useEffect( () => {
-        dataPoke.data.length!==0 &&  Array.from(dataPoke.data).forEach( (c,i)=>{
+        dataPoke.length!==0 &&  Array.from(dataPoke).forEach( (c,i)=>{
             if(c.langName.indexOf(filterText) === -1){
                 return
             } else {

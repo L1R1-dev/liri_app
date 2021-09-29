@@ -1,0 +1,27 @@
+.lettre{
+    color: rgb(216, 212, 212);
+
+}
+@keyframes flash {
+    0% {
+      color: #fff900;
+      text-shadow: 0 0 7px #fff900;
+    }
+    90%{
+      color: rgb(216, 212, 212);
+      text-shadow: 0 0 7px rgb(216, 212, 212);
+    }
+    100% {
+      color: #fff900;
+      text-shadow: 0 0 7px #fff900;
+    }
+  }
+  @keyframes breath {
+    from {
+      transform: scale(1);
+    }
+    to {
+      transform: scale(1.2);
+      /* animation-direction: alternate; */
+    }
+  }

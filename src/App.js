@@ -15,17 +15,14 @@ function App() {
             return setClosePokeContainer(false)
           } else {
             setClosePokeContainer(true)
-          }
-          
+          }     
+    }
   
-      }
-  
-      return (
-    <div className="App" onClick={handleClick}>
-      <PokeApp onClosing={closePokeContainer} />
-
-    </div>
-  );
+    return (
+      <div className="App" onClick={handleClick}>
+        <PokeApp onClosing={closePokeContainer} />
+      </div>
+    );
 }
 
 export default App;

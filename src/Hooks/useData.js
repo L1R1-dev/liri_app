@@ -2,17 +2,18 @@ import { useEffect, useState } from 'react'
 
 import useSingleFetch from '../Hooks/useSingleFetch'
 import useMultiFetch from '../Hooks/useMultiFetch'
+import { Loading } from '../animation/Loading'
 
 export default function useData(url) {
      // 1.URLS
      const [urlLoading, urlData,] = useSingleFetch(url)
      const [speciesUrl,setSpeciesUrl] = useState([])
- 
      // 2.DATA
      const [loading, speciesData,] = useMultiFetch(speciesUrl)
         
      // 3.Sharing state ? 
      const [state, setState] = useState([])
+     const lettres = ['C','H','A','R','G','E','M','E','N','T','.','.','.']
      
      // 2-
      useEffect(()=>{
@@ -54,8 +55,10 @@ export default function useData(url) {
                 setState([])
             }
         })
+        console.log('usedata',loading)
      },[loading, speciesData])
-    return [
-        state
-    ]
+     return [
+        state,
+        loading
+     ]
 }
