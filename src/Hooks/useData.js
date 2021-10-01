@@ -10,7 +10,7 @@ export default function useData(url) {
     const [speciesUrl,setSpeciesUrl] = useState([])
     // 2.DATA
     const [loading, speciesData,] = useMultiFetch(speciesUrl)
-    console.log(speciesData)
+    
     // 3.Sharing state ? 
     const [state, setState] = useState([])
     const lettres = ['C','H','A','R','G','E','M','E','N','T','.','.','.']
