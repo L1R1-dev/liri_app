@@ -25,6 +25,7 @@ export default function useMultiFetch(urls) {
         }
 
     },[urls])
+    console.log(urls)
     return [
         loading,
         data,

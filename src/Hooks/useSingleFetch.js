@@ -20,7 +20,7 @@ export default function useSingleFetch(url) {
             setLoading(true)    
         }
     },[url])
-    console.log(url)
+    
     return [
         loading,
         data,
