@@ -19,7 +19,7 @@ export default function useSingleFetch(url) {
             setData([])
             setLoading(true)    
         }
-    },[])
+    },[url])
     return [
         loading,
         data,
