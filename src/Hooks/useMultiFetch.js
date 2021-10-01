@@ -1,40 +1,34 @@
 import { useEffect, useState } from 'react'
 
 export default function useMultiFetch(urls) {
-    const [ state, setState ] = useState({
-        error:[],
-        data:[],
-        loading: true
+    const [error] = useState([])
+    const [data,setData] = useState([])
+    const [loading, setLoading] = useState(true)
+    
+    // console.log(urls);
 
-    })
-    
-    
-     useEffect(()=>{
-        urls !== false && (async function(){
+    useEffect(()=>{
+        (async function(){
             
-            const promise = await Promise.all( urls.map( u=> fetch(u)) )
+            const promise = await Promise.all(urls.map( u=> fetch(u) ))
             const response = await Promise.all( promise.map( p=> p.json()))
-            setState(s=>({
-                ...s,
-                data: response,
-                loading: !s.loading
-            }))
-
+            
+            setData(response)
+            setLoading(false)
+            
         })()
-         
+        
         return () => {
-            setState({
-                error:[],
-                data: [],
-                loading: true
-            })
+            setData([])
+            setLoading(true)
+            
         }
 
-    },[urls])
+    },[])
     return [
-        state.loading,
-        state.data,
-        state.error,
+        loading,
+        data,
+        error,
     ]
     
     

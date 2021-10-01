@@ -1,4 +1,4 @@
-import React, { createContext, useCallback, useMemo } from 'react'
+import React, { createContext, useMemo } from 'react'
 import { Loading } from '../animation/Loading'
 import useData from '../Hooks/useData'
 import '../css/loading.css'
@@ -13,16 +13,13 @@ const GlobalState = ({ children }) =>{
     //     items:[]
     // })
     
-    const loadAnim = useCallback(()=>{
-        return 
-    },[])
-
+    
     const dataPoke = useMemo(()=>{
         return {
             data
         }
     },[data])
-    !loading && data.length !== 0 && console.log(dataPoke.data)
+    // !loading && data.length !== 0 && console.log(dataPoke.data)
     return(
         <UpperPoke.Provider value={dataPoke.data}> 
             {
@@ -32,9 +29,9 @@ const GlobalState = ({ children }) =>{
                 // children
                 
             }
-            {
+            {/* {
                 console.log('render')
-            }
+            } */}
         </UpperPoke.Provider>
     )
 }

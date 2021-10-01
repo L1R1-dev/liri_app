@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import GlobalState from '../contextApi/GlobalState'
 import GlobalStateComparaison from '../contextApi/GlobalStateComparaison'
 // import GetPokeSpecies from '../data/GetPokeSpecies'
 import SearchBar from '../components/pokeApp/searchBar/SearchBar'
 import Comparaison from '../components/pokeApp/comparaison/Comparaison'
 import '../css/pokeApp.css'
-import useData from '../Hooks/useData'
-import { Loading } from '../animation/Loading'
+
 
 
 export default function PokeApp({onClosing}) {
