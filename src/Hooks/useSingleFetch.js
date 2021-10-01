@@ -6,7 +6,7 @@ export default function useSingleFetch(url) {
     const [loading, setLoading] = useState(true)
 
     useEffect(()=>{
-        (async function(){
+        url.length !== 0 && url !== false && (async function(){
             const response = await fetch(url)
             const responseData = await response.json()
             if(response.ok){

@@ -14,7 +14,7 @@ export default function useData(url) {
     // 3.Sharing state ? 
     const [state, setState] = useState([])
     const lettres = ['C','H','A','R','G','E','M','E','N','T','.','.','.']
-    
+
     // 2-
     useEffect(()=>{
         !urlLoading && urlData.pokemon_entries.forEach(p=>{
@@ -26,6 +26,7 @@ export default function useData(url) {
         return () =>{
             setSpeciesUrl([])
         }
+
     },[urlData.pokemon_entries, urlLoading])
 
     //from speciesUrls make an initial object (items) => (dataForSearging)

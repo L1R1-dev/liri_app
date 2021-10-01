@@ -20,11 +20,12 @@ const GlobalState = ({ children }) =>{
         }
     },[data])
     // !loading && data.length !== 0 && console.log(dataPoke.data)
+    console.log(loading)
     return(
         <UpperPoke.Provider value={dataPoke.data}> 
             {
                 // <Loading lettres={lettres} />
-                loading || data.length === 0 ? <Loading lettres={lettres} /> : children 
+                !loading ? children : <Loading lettres={lettres} />
                 
                 // children
                 

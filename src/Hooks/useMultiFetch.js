@@ -8,14 +8,13 @@ export default function useMultiFetch(urls) {
     // console.log(urls);
 
     useEffect(()=>{
-        (async function(){
+        urls !== false && urls.length !== 0 && (async function(){
             
             const promise = await Promise.all(Array.from(urls).map( u=> fetch(u) ))
             const response = await Promise.all( promise.map( p=> p.json()))
     
             setData(response)
             setLoading(false)
-            
         })()
         
         return () => {
@@ -25,7 +24,6 @@ export default function useMultiFetch(urls) {
         }
 
     },[urls])
-    console.log(urls)
     return [
         loading,
         data,
