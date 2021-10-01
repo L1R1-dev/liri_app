@@ -48,7 +48,7 @@ export default function useMultiFetch(urls) {
 
 
     //             setMultiDatas(s=>({
-    //                 ...s.data,
+    //                 ...s.data,q
     //                 data: response
     //             }))
 
