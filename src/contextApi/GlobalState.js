@@ -20,7 +20,7 @@ const GlobalState = ({ children }) =>{
 
             setShow(children) 
         }
-    },[loading])
+    },[loading,children])
    !loading && data.length !== 0 && show.length !== 0 && console.log(data,show)
     return(
         <UpperPoke.Provider value={dataPoke}> 
