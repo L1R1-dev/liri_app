@@ -16,8 +16,10 @@ const GlobalState = ({ children }) =>{
     useEffect(()=>{
         if ( loading ) {
             setShow(<Loading lettres={lettres} />) 
+        } else {
+
+            setShow(children) 
         }
-        setShow(children) 
     },[loading])
    !loading && data.length !== 0 && show.length !== 0 && console.log(data,show)
     return(
