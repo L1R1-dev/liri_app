@@ -14,11 +14,9 @@ const GlobalState = ({ children }) =>{
     // })
     
     
-    const dataPoke = useMemo(()=>{
-        return {
-            data
-        }
-    },[data])
+    const dataPoke = {
+        data
+    }
     // !loading && data.length !== 0 && console.log(dataPoke.data)
     console.log(loading)
     return(
