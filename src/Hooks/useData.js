@@ -63,7 +63,7 @@ export default function useData(url) {
     
     // !loading && state.length !== 0 ? console.log(urlData) : console.log('loading')
     return [
-        !loading && state,
+        state,
         loading
     ]
 }

@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useMemo, useState } from 'react'
+import React, { createContext, useEffect, useLayoutEffect, useMemo, useState } from 'react'
 import { Loading } from '../animation/Loading'
 import useData from '../Hooks/useData'
 import '../css/loading.css'
@@ -13,7 +13,7 @@ const GlobalState = ({ children }) =>{
         return data
         
     },[data])
-    useEffect(()=>{
+    useLayoutEffect(()=>{
         if ( loading ) {
             setShow(<Loading lettres={lettres} />) 
         } else {
