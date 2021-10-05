@@ -17,11 +17,11 @@ export function Loading ({
     // }
 }) {
         
-    // const childRef = useRef(children)
+    const childRef = useRef(lettres)
     const [state, setState] = useState( loading ? ( animateEnter ? ENTERING : VISIBLE ) : HIDDEN)
 
     if(loading){
-        // childRef.current = children
+        childRef.current = lettres
     }
     
     useEffect(()=>{
@@ -68,23 +68,25 @@ export function Loading ({
     
     let iter = 0
     
-    return <div style={{
-        position: 'absolute',
-        top:'49%',
-        left:'48%',
-        animation: `breath 8000ms linear infinite`,
-        animationDirection: 'alternate'
-    }}  > 
-        
-        {
-            lettres.map( (l,i) =>{    
-                iter = iter + 0.1
-                return <span key={i} className='lettres' style={{
-                    animation: `flash ${duration}ms linear infinite`,
-                    animationDelay: `${iter}s`
-                }}> {l} </span>
-            })
-        }
-         
-    </div>
+    return (
+        <div style={{
+            position: 'absolute',
+            top:'49%',
+            left:'48%',
+            animation: `breath 8000ms linear infinite`,
+            animationDirection: 'alternate'
+        }}  > 
+            
+            {
+                childRef.current.map( (l,i) =>{    
+                    iter = iter + 0.1
+                    return <span key={i} className='lettres' style={{
+                        animation: `flash ${duration}ms linear infinite`,
+                        animationDelay: `${iter}s`
+                    }}> {l} </span>
+                })
+            }
+             
+        </div>
+    )
 }

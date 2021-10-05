@@ -1,4 +1,4 @@
-import React, { createContext, useMemo } from 'react'
+import React, { createContext, useEffect, useMemo, useState } from 'react'
 import { Loading } from '../animation/Loading'
 import useData from '../Hooks/useData'
 import '../css/loading.css'
@@ -7,30 +7,26 @@ export const UpperPoke = createContext()
 
 const GlobalState = ({ children }) =>{ 
     const [ data, loading ] = useData('https://pokeapi.co/api/v2/pokedex/1/')
+    const [ show, setShow ] = useState()
     const lettres = ['C','H','A','R','G','E','M','E','N','T','.','.','.']
-    // const [pokemons,setPokemons] = useState([])
-    // const [pokemons,setPokemons] = useState({
-    //     items:[]
-    // })
+    const dataPoke = useMemo(()=>{
+        return data
+        
+    },[data])
+    useEffect(()=>{
+        if ( loading ) {
+            setShow(<Loading lettres={lettres} />) 
+        } else {
+            setShow(children) 
+        }
+    },[loading])
+   
     
-    
-    const dataPoke = {
-        data
-    }
-    // !loading && data.length !== 0 && console.log(dataPoke.data)
-    console.log(loading)
     return(
-        <UpperPoke.Provider value={dataPoke.data}> 
+        <UpperPoke.Provider value={dataPoke}> 
             {
-                // <Loading lettres={lettres} />
-                !loading ? children : <Loading lettres={lettres} />
-                
-                // children
-                
+                show
             }
-            {/* {
-                console.log('render')
-            } */}
         </UpperPoke.Provider>
     )
 }

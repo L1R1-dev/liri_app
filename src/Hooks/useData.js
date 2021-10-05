@@ -17,7 +17,7 @@ export default function useData(url) {
 
     // 2-
     useEffect(()=>{
-        !urlLoading && urlData.pokemon_entries.forEach(p=>{
+        !urlLoading  && urlData.pokemon_entries.forEach(p=>{
             setSpeciesUrl(s=>[
                 ...s,
                 p.pokemon_species.url
@@ -27,12 +27,12 @@ export default function useData(url) {
             setSpeciesUrl([])
         }
 
-    },[urlData.pokemon_entries, urlLoading])
+    },[urlLoading])
 
     //from speciesUrls make an initial object (items) => (dataForSearging)
     
     useEffect(()=>{
-    (!loading && speciesData !== undefined) && speciesData.forEach( s => {
+    (!loading && speciesData !== ( undefined || null )) && speciesData.forEach( s => {
         let item = {
             id: s.id,
             is_baby: s.is_baby ? true : false,
@@ -58,6 +58,10 @@ export default function useData(url) {
         }
     })
     },[loading, speciesData])
+    // !loading && console.log(state)
+    // !loading && state.length !== 0 ? console.log(state) : console.log('loading')
+    console.log(url)
+    // !loading && state.length !== 0 ? console.log(urlData) : console.log('loading')
     return [
     state,
     loading
