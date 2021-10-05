@@ -21,8 +21,9 @@ export default function PokeApp({onClosing}) {
             {/* Searbar influcance PokeContainer */}
             <div id='some-space'>
                 {/* Somthing Else ? */}
-            </div>
-    
+            </div>{
+                console.log('render')
+            }
             <GlobalState> 
                 {/* State Of Loaded Pokemons */}
                 <GlobalStateComparaison>

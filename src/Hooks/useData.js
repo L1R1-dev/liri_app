@@ -32,38 +32,38 @@ export default function useData(url) {
     //from speciesUrls make an initial object (items) => (dataForSearging)
     
     useEffect(()=>{
-    (!loading && speciesData !== ( undefined || null )) && speciesData.forEach( s => {
-        let item = {
-            id: s.id,
-            is_baby: s.is_baby ? true : false,
-            is_legendary: s.is_legendary? true : false,
-            is_mythical: s.is_mythical? true : false,
-        }
-        s.names.forEach( n => {
-            if(n.language.name === 'fr') {
-                item.langName = n.name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()                                
+        (!loading && speciesData !== ( undefined || null )) && speciesData.forEach( s => {
+            let item = {
+                id: s.id,
+                is_baby: s.is_baby ? true : false,
+                is_legendary: s.is_legendary? true : false,
+                is_mythical: s.is_mythical? true : false,
+            }
+            s.names.forEach( n => {
+                if(n.language.name === 'fr') {
+                    item.langName = n.name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()                                
+                }
+            })
+            s.varieties.forEach( v => {
+                if(v.is_default){
+                    item.pokemon = v.pokemon.url
+                }
+            })
+            setState(s=>([
+                ...s,
+                item
+            ]))
+            return ()=>{
+                setState([])
             }
         })
-        s.varieties.forEach( v => {
-            if(v.is_default){
-                item.pokemon = v.pokemon.url
-            }
-        })
-        setState(s=>([
-            ...s,
-            item
-        ]))
-        return ()=>{
-            setState([])
-        }
-    })
     },[loading, speciesData])
     // !loading && console.log(state)
     // !loading && state.length !== 0 ? console.log(state) : console.log('loading')
-    console.log(url)
+    
     // !loading && state.length !== 0 ? console.log(urlData) : console.log('loading')
     return [
-    state,
-    loading
+        !loading && state,
+        loading
     ]
 }
