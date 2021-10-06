@@ -26,6 +26,7 @@ export default function PokeApp({onClosing}) {
             }
             <GlobalState> 
                 {/* State Of Loaded Pokemons */}
+                {/* console.log('render') */}
                 <GlobalStateComparaison>
                     {/* State Of Pokemons To Compare */}
                     <SearchBar 

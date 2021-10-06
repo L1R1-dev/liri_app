@@ -20,9 +20,9 @@ export function Loading ({
     const childRef = useRef(lettres)
     const [state, setState] = useState( loading ? ( animateEnter ? ENTERING : VISIBLE ) : HIDDEN)
 
-    if(loading){
-        childRef.current = lettres
-    }
+    // if(loading){
+    //     childRef.current = lettres
+    // }
     
     useEffect(()=>{
         if(!loading){
