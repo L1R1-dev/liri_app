@@ -15,19 +15,25 @@ const GlobalState = ({ children }) =>{
     },[data])
     useLayoutEffect(()=>{
         if ( loading ) {
-            setShow(<Loading lettres={lettres} />) 
+            setShow(
+                <Loading lettres={lettres} />
+            ) 
         } else {
-
-            setShow(children) 
+            setShow(
+                <UpperPoke.Provider value={dataPoke}> 
+                    {children}
+                </UpperPoke.Provider>
+            )
+            
         }
     },[loading,children])
    !loading && data.length !== 0 && show.length !== 0 && console.log(data,show)
     return(
-        <UpperPoke.Provider value={dataPoke}> 
+        <React.Fragment>
             {
                 show
             }
-        </UpperPoke.Provider>
+        </React.Fragment>
     )
 }
 
